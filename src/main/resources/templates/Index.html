@@ -9,6 +9,15 @@
     </head>
     <body>
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
+
+        <div class="px-4 py-5 my-5 text-center">
+            <img class="d-block mx-auto mb-4" th:src="@{/vendor/images/logoDataA.png}" alt="" width="115" height="60">
+            <h2 class="display-5 fw-bold">Bem vindo!</h2>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">O aplicativo tem como público alvo pessoas que trabalham dentro de entidades de previdência complementar e que desejam realizar eleições para preencher cargos de dentro da própria entidade.</p>
+            </div>
+        </div>
+        
         <th:block th:replace="fragments/JsFragment :: script"></th:block>
     </body>
 </html>

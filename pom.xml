@@ -12,7 +12,7 @@
     <artifactId>eleicaoptep</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eleicaoptep</name>
-    <description>O aplicativo tem como público alvo pessoas que trabalham dentro de entidades de previdência complementar e que desejam realizar eleições para preencher cargos de dentro da própria entidade. </description>
+    <description>O aplicativo tem como público alvo pessoas que trabalham dentro de entidades de previdência complementar e que desejam realizar eleições para preencher cargos de dentro da própria entidade.</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

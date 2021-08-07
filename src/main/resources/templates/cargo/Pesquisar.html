@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Pesquisa de eleição</title>
+        <title>Pesquisa de cargo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <th:block th:replace="fragments/CssFragment :: css"></th:block>
@@ -10,18 +10,18 @@
     <body>
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
         <div class="container-fluid">
-            <div th:if="${#lists.isEmpty(listaEleicao)}">
+            <div th:if="${#lists.isEmpty(listaCargo)}">
                 <div style="height: 44px; width: 100%;" class="toast align-items-center text-white bg-warning border-0 mt-1 mb-1" data-animation="true" data-autohide="true" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
                         <div class="toast-body">
-                            <p class="">Nenhuma eleição encontrada</p>
+                            <p class="">Nenhum cargo encontrado</p>
                         </div>
                         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                 </div>
             </div>
             
-            <form method="GET" th:object="${filtroEleicao}">
+            <form method="GET" th:object="${filtroCargo}">
                 <div class="accordion shadow-sm mb-2 mt-2 bg-body rounded" id="accordionPesquisar">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
@@ -34,21 +34,13 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="mb-3 col-12 col-md-4  col-lg-4">
-                                                <label for="nomeDaEleicao" class="form-label">Nome</label>
-                                                <input th:field="*{nomeDaEleicao}" type="text" class="form-control" id="nomeDaEleicao" name="nomeDaEleicao"/>
-                                            </div>
-                                            <div class="mb-3 col-12 col-md-4 col-lg-4">
-                                                <label for="iniciaEm" class="form-label">Data inicial</label>
-                                                <input th:field="*{iniciaEm}" type="date" class="form-control" id="iniciaEm" name="iniciaEm"/>
-                                            </div>
-                                            <div class="mb-3 col-12 col-md-4 col-lg-4">
-                                                <label for="finalizaEm" class="form-label">Data final</label>
-                                                <input type="date" th:field="*{finalizaEm}" class="form-control" id="finalizaEm" name="finalizaEm"/>
+                                            <div class="mb-3 col-12 col-md-12  col-lg-12">
+                                                <label for="nomeDoCargo" class="form-label">Nome</label>
+                                                <input th:field="*{nomeDoCargo}" type="text" class="form-control" id="nomeDoCargo" name="nomeDoCargo"/>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn  btn-primary btn-sm">Pesquisar</button>
-                                        <a th:href="@{/eleicao}" class="btn btn-outline-secondary btn-sm">Nova</a>
+                                        <a th:href="@{/cargo}" class="btn btn-outline-secondary btn-sm">Novo</a>
                                     </div>
                                 </div>
                             </div>
@@ -57,32 +49,28 @@
                 </div>
             </form>
             
-            <table id="tbEleicoes" class="table table-bordered shadow-sm caption-top mt-4" style="width: 100%">
-                <caption>Lista de eleções</caption>
+            <table id="tbCargos" class="table table-bordered shadow-sm caption-top mt-4" style="width: 100%">
+                <caption>Lista de cargos</caption>
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Data de inicio</th>
-                        <th>Data do fim</th>
                         <th style="text-align: center; width: 100px;">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="eleicao : ${listaEleicao}">
-                        <td th:text="${eleicao.nome}">Nome</td>
-                        <td th:text="${#temporals.format(eleicao.dataInicio,'dd/MM/yyyy')}">Data de inicio</td>
-                        <td th:text="${#temporals.format(eleicao.dataFinal, 'dd/MM/yyyy')}">Data do fim</td>
+                    <tr th:each="cargo : ${listaCargo}">
+                        <td th:text="${cargo.nome}">Nome</td>
                         <td style="text-align: center;">
-                            <a title="Excluir" data:url="@{/eleicao/{codigo}(codigo=${eleicao.id})}" data:objeto="${eleicao.nome}" class="btn btn-danger btn-sm js-exclusao-btn">
+                            <a title="Excluir" data:url="@{/cargo/{codigo}(codigo=${cargo.id})}" data:objeto="${cargo.nome}" class="btn btn-danger btn-sm js-exclusao-btn">
                                 <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
                             </a>
-                            <a title="Editar" th:href="@{/eleicao/{codigo}(codigo=${eleicao.id})}" class="btn btn-info btn-sm text-white">
+                            <a title="Editar" th:href="@{/cargo/{codigo}(codigo=${cargo.id})}" class="btn btn-info btn-sm text-white">
                                 <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
                             </a>
                         </td>
                     </tr>
-                    <tr th:if="${#lists.isEmpty(listaEleicao)}">
-                        <td colspan="4">Nenhuma eleição encontrada</td>
+                    <tr th:if="${#lists.isEmpty(listaCargo)}">
+                        <td colspan="4">Nenhum cargo encontrado</td>
                     </tr>
                 </tbody>
             </table>
@@ -91,7 +79,7 @@
         <th:block th:replace="fragments/JsFragment :: script"></th:block>
         <script type="text/javascript">
             $(function () {
-                $("#nomeDaEleicao").focus();
+                $("#nomeDoCargo").focus();
                 setTimeout(() => {
                     $(".toast").toast('show');
                 }, 0);

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadidato</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <th:block th:replace="fragments/CssFragment :: css"></th:block>
+    </head>
+    <body>
+        <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
+        <div class="container-fluid">
+            <th:block th:include="fragments/MensagemSucesso"></th:block>
+            <form th:action="${candidato.id} == null ? @{/candidato/salvar} : @{/candidato/update/{codigo}(codigo=${candidato.id})}" method="post" th:object="${candidato}">
+                <th:block th:include="fragments/MensagensErroValidacao"></th:block>
+                <div class="shadow-sm bg-body rounded mb-3" style="margin-top: 40px;">
+                    <div class="card">
+                        <h5 class="card-header">Cadastro de candidato</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <th:block th:replace="fragments/JsFragment :: script"></th:block>
+    </body>
+</html>
