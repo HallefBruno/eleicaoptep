@@ -25,17 +25,18 @@
                                 <div class="mt-2 col-12 col-sm-12 col-md-12 col-lg-12">
                                     <label for="dataInicio" class="form-label">Data inicio</label>
                                     <div class="input-group">
-                                        <input type="date" th:value="*{dataInicio}" th:field="*{dataInicio}" required="true" class="form-control" id="dataInicio" name="dataInicio"/>
+                                        <input type="date" th:field="*{dataInicio}" required="true" class="form-control" id="dataInicio" name="dataInicio"/>
                                         <span class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
                                 <div class="mt-2 col-12 col-sm-12 col-md-12 col-lg-12">
                                     <label for="dataFinal" class="form-label">Data fim</label>
                                     <div class="input-group">
-                                        <input type="date" th:value="*{dataFinal}" th:field="*{dataFinal}" required="true" class="form-control" id="dataFinal" name="dataFinal"/>
+                                        <input type="date" th:field="*{dataFinal}" required="true" class="form-control" id="dataFinal" name="dataFinal"/>
                                         <span class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
+                                <input type="hidden" th:field="*{versaoObjeto}" required="true" id="versaoObjeto" name="versaoObjeto"/>
                             </div>
                             <div class="btn-group mt-3" role="group" aria-label="">
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">

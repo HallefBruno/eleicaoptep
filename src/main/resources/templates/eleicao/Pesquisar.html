@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Pesquisa de eleição</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <th:block th:replace="fragments/CssFragment :: css"></th:block>
+    </head>
+    <body>
+        <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
+        <div class="container-fluid">
+            <div th:if="${#lists.isEmpty(listaEleicao)}">
+                <div style="height: 44px; width: 100%;" class="toast align-items-center text-white bg-warning border-0 mt-1 mb-1" data-animation="true" data-autohide="true" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <p class="">Nenhuma eleição encontrada!</p>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="GET" th:object="${filtroEleicao}">
+                <div class="accordion shadow-sm mb-2 mt-2 bg-body rounded" id="accordionPesquisar">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Pesquisar
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPesquisar">
+                            <div class="accordion-body">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="mb-3 col-12 col-md-4  col-lg-4">
+                                                <label for="nomeDaEleicao" class="form-label">Nome</label>
+                                                <input th:field="*{nomeDaEleicao}" type="text" class="form-control" id="nomeDaEleicao" name="nomeDaEleicao"/>
+                                            </div>
+                                            <div class="mb-3 col-12 col-md-4 col-lg-4">
+                                                <label for="iniciaEm" class="form-label">Data inicial</label>
+                                                <input th:field="*{iniciaEm}" type="date" class="form-control" id="iniciaEm" name="iniciaEm"/>
+                                            </div>
+                                            <div class="mb-3 col-12 col-md-4 col-lg-4">
+                                                <label for="finalizaEm" class="form-label">Data final</label>
+                                                <input type="date" th:field="*{finalizaEm}" class="form-control" id="finalizaEm" name="finalizaEm"/>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn  btn-primary btn-sm">Pesquisar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <table id="tbEleicoes" class="table table-bordered shadow-sm caption-top mt-4" style="width: 100%">
+                <caption>Lista de eleções</caption>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data de inicio</th>
+                        <th>Data do fim</th>
+                        <th style="text-align: center; width: 100px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="eleicao : ${listaEleicao}">
+                        <td th:text="${eleicao.nome}">Nome</td>
+                        <td th:text="${#temporals.format(eleicao.dataInicio,'dd/MM/yyyy')}">Data de inicio</td>
+                        <td th:text="${#temporals.format(eleicao.dataFinal, 'dd/MM/yyyy')}">Data do fim</td>
+                        <td style="text-align: center;">
+                            <a title="Excluir" data:url="@{/eleicao/{codigo}(codigo=${eleicao.id})}" data:objeto="${eleicao.nome}" class="btn btn-danger btn-sm js-exclusao-btn">
+                                <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                            </a>
+                            <a title="Editar" th:href="@{/eleicao/{codigo}(codigo=${eleicao.id})}" class="btn btn-info btn-sm">
+                                <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(listaEleicao)}">
+                        <td colspan="4">Nenhuma eleição encontrada</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        <th:block th:replace="fragments/JsFragment :: script"></th:block>
+        <script type="text/javascript">
+            $(function () {
+                $("#nomeDaEleicao").focus();
+                setTimeout(() => {
+                    $(".toast").toast('show');
+                }, 0);
+            });
+        </script>
+    </body>
+</html>
