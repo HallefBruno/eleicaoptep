@@ -11,6 +11,7 @@ import java.util.Optional;
 import javax.persistence.PersistenceException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +43,7 @@ public class CargoService {
         if (opCargo.isPresent()) {
             Cargo atual = opCargo.get();
             if(!Objects.equals(atual.getVersaoObjeto(), cargo.getVersaoObjeto())) {
-                throw new NegocioException("Erro de concorrência. Essa cargo já foi alterado anteriormente.");
+                throw new NegocioException("Erro de concorrência. Essa cargo já foi alterado anteriormente!");
             }
             BeanUtils.copyProperties(cargo, atual, "id");
             cargoRepository.save(atual);
@@ -55,8 +56,12 @@ public class CargoService {
             cargoRepository.delete(cargo);
             cargoRepository.flush();
         } catch (PersistenceException e) {
-            throw new NegocioException("Impossível excluir a eleição");
+            throw new NegocioException("Impossível excluir o cargo!");
         }
+    }
+    
+    public List<Cargo> todos() {
+        return cargoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
     }
     
 }

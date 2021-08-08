@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -43,6 +42,9 @@ public class Candidato implements Serializable {
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Cargo cargo;
+    
+    @Column(nullable = false, name = "nome_foto", unique = true)
+    private String nomeFoto;
     
     @Version
     @Column(name = "versao_objeto", nullable = false)
