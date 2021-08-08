@@ -82,7 +82,7 @@ public class CargoController {
     }
     
     @GetMapping("pesquisar")
-    public ModelAndView pesqisar(FiltroCargo filtroCargo) {
+    public ModelAndView pesquisar(FiltroCargo filtroCargo) {
         ModelAndView mv = new ModelAndView("cargo/Pesquisar");
         mv.addObject("listaCargo", cargoService.filtrarPorNome(filtroCargo));
         return mv;

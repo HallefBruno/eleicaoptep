@@ -24,7 +24,7 @@ public class EleicaoRepositoryImpl implements EleicaoRepositoryCustom {
     private EntityManager manager;
 
     @Override
-    public List<Eleicao> buscarEleicaoPor(FiltroEleicao filtroEleicao) {
+    public List<Eleicao> buscarEleicoesPor(FiltroEleicao filtroEleicao) {
 
         CriteriaBuilder cb = manager.getCriteriaBuilder();
         CriteriaQuery<Eleicao> query = cb.createQuery(Eleicao.class);

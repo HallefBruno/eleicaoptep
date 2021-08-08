@@ -57,7 +57,7 @@ public class EleicaoService {
     
     @Transactional
     public List<Eleicao> buscarElecaoPor(FiltroEleicao filtroEleicao) {
-        return eleicaoRepository.buscarEleicaoPor(filtroEleicao);
+        return eleicaoRepository.buscarEleicoesPor(filtroEleicao);
     }
     
 }

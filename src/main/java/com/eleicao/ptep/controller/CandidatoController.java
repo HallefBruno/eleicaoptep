@@ -3,6 +3,8 @@ package com.eleicao.ptep.controller;
 
 import com.eleicao.ptep.entidade.Candidato;
 import com.eleicao.ptep.entidade.Cargo;
+import com.eleicao.ptep.entidade.dto.FiltroCandidato;
+import com.eleicao.ptep.entidade.dto.FiltroCargo;
 import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.service.CandidatoService;
 import com.eleicao.ptep.service.CargoService;
@@ -17,13 +19,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
@@ -61,6 +63,21 @@ public class CandidatoController {
         }
         attributes.addFlashAttribute("mensagem", "Candidato salvo com sucesso!");
         return new ModelAndView("redirect:/candidato", HttpStatus.CREATED);
+    }
+    
+    @GetMapping("pesquisar")
+    public ModelAndView pesquisar(FiltroCandidato filtroCandidato) {
+        ModelAndView mv = new ModelAndView("candidato/Pesquisar");
+        mv.addObject("cargos", cargoService.todos());
+        mv.addObject("listaCandidato", candidatoService.buscarCandidatoPor(filtroCandidato));
+        return mv;
+    }
+    
+    @GetMapping("{codigo}")
+    public ModelAndView editar(@PathVariable("codigo") Candidato candidato) {
+        ModelAndView mv = pageCandidato(candidato);
+        mv.addObject(candidato);
+        return mv;
     }
     
 }

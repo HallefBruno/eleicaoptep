@@ -9,7 +9,7 @@ $(function () {
         }
     });
 
-    $('form').submit(function () {
+    $("#formNovoCandidato").submit(function () {
         $("#divLoading").addClass("loading");
         return true;
     });

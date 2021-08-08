@@ -2,12 +2,15 @@ package com.eleicao.ptep.service;
 
 import com.eleicao.ptep.coud.StorageCloudnary;
 import com.eleicao.ptep.entidade.Candidato;
+import com.eleicao.ptep.entidade.dto.FiltroCandidato;
 import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.repository.CandidatoRepository;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.persistence.PersistenceException;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +35,9 @@ public class CandidatoService {
     public void salvar(Candidato candidato, MultipartFile multipartFile) {
         try {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            System.out.println(fileName+" "+multipartFile.getContentType());
+            String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
             candidato.setNomeFoto(fileName);
+            candidato.setExtensao(extension);
             Candidato novo = candidatoRepository.save(candidato);
             storageCloudnary.uploadFoto(multipartFile.getBytes(), novo.getId());
         } catch(IOException ex) {
@@ -65,6 +69,10 @@ public class CandidatoService {
         } catch (PersistenceException e) {
             throw new NegocioException("Impossível excluir o candidato!");
         }
+    }
+    
+    public List<Candidato> buscarCandidatoPor(FiltroCandidato filtroCandidato) {
+        return candidatoRepository.buscarCandidatoPor(filtroCandidato);
     }
     
 }

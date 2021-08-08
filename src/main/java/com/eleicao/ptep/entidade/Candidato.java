@@ -46,6 +46,9 @@ public class Candidato implements Serializable {
     @Column(nullable = false, name = "nome_foto", unique = true)
     private String nomeFoto;
     
+    @Column(nullable = false)
+    private String extensao;
+    
     @Version
     @Column(name = "versao_objeto", nullable = false)
     private Integer versaoObjeto;

@@ -10,5 +10,5 @@ import java.util.List;
  * @author hallef
  */
 public interface EleicaoRepositoryCustom {
-    List<Eleicao> buscarEleicaoPor(FiltroEleicao filtroEleicao);
+    List<Eleicao> buscarEleicoesPor(FiltroEleicao filtroEleicao);
 }

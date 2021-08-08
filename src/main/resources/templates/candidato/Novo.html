@@ -10,7 +10,7 @@
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
         <div class="container-fluid">
             <th:block th:include="fragments/MensagemSucesso"></th:block>
-            <form th:action="${candidato.id} == null ? @{/candidato/salvar} : @{/candidato/update/{codigo}(codigo=${candidato.id})}" enctype="multipart/form-data" method="post" th:object="${candidato}">
+            <form id="formNovoCandidato" th:action="${candidato.id} == null ? @{/candidato/salvar} : @{/candidato/update/{codigo}(codigo=${candidato.id})}" enctype="multipart/form-data" method="post" th:object="${candidato}">
                 <th:block th:include="fragments/MensagensErroValidacao"></th:block>
                 <div class="shadow-sm bg-body rounded mb-3" style="margin-top: 40px;">
                     <div class="card">
@@ -55,6 +55,6 @@
         </div>
         <div id="divLoading"></div>
         <th:block th:replace="fragments/JsFragment :: script"></th:block>
-        <script th:src="@{/candidato/Candidato.js}"></script>
+        <script th:src="@{/cand/Cand.js}" type="text/javascript"></script>
     </body>
 </html>

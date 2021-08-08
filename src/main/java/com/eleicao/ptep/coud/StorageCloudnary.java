@@ -23,15 +23,8 @@ public class StorageCloudnary {
     }
 
     public void uploadFoto(byte[] dataImage,Long candidatoId) throws IOException {
-        Map conf = ObjectUtils.asMap("public_id", "candidato/"+candidatoId, "transformation", new Transformation().width(50).height(50).gravity("face").crop("fill").radius("max"));
+        Map conf = ObjectUtils.asMap("public_id", "candidato/"+candidatoId, "transformation", new Transformation().width(90).height(90).gravity("face").crop("fill").radius("max"));
         Cloudinary cloudinary = new Cloudinary(configOpenCloudinary());
         cloudinary.uploader().upload(dataImage, conf);
     }
-
-//    public Map savePhotoResident(byte[] dataImage, String residentName, Long idResident) throws IOException {
-//        Map conf = ObjectUtils.asMap("public_id", "resident/" + residentName + "_" + idResident);
-//        Cloudinary cloudinary = new Cloudinary(configOpenCloudinary());
-//        return cloudinary.uploader().upload(dataImage, conf);//.gravity("face")
-//    }
-
 }
