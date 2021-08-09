@@ -33,31 +33,58 @@ public class CandidatoService {
     
     @Transactional
     public void salvar(Candidato candidato, MultipartFile multipartFile) {
+        String nomeArquivo = "";
         try {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-            candidato.setNomeFoto(fileName);
+            candidato.setNomeFoto(fileName.substring(0, fileName.lastIndexOf(".")));
             candidato.setExtensao(extension);
             Candidato novo = candidatoRepository.save(candidato);
-            storageCloudnary.uploadFoto(multipartFile.getBytes(), novo.getId());
+            nomeArquivo =  novo.getId().toString()+"-"+candidato.getNomeFoto();
+            storageCloudnary.uploadFoto(multipartFile.getBytes(),nomeArquivo);
         } catch(IOException ex) {
+            try {
+                storageCloudnary.deleteFoto(nomeArquivo);
+            } catch (IOException ex1) {
+                throw new NegocioException(ex1.getMessage());
+            }
             throw new NegocioException(ex.getMessage());
         }
     }
     
     @Transactional
-    public void update(Candidato candidato, Long codigo) {
+    public void update(Candidato candidato, Long codigo, MultipartFile multipartFile) {
+        String filedelete = "";
         if (Objects.isNull(codigo)) {
             throw new NegocioException("Código não pode ser null!");
         }
         Optional<Candidato> opCandidato = candidatoRepository.findById(codigo);
         if (opCandidato.isPresent()) {
-            Candidato atual = opCandidato.get();
-            if(!Objects.equals(atual.getVersaoObjeto(), candidato.getVersaoObjeto())) {
-                throw new NegocioException("Erro de concorrência. Essa candidato já foi alterado anteriormente!");
+            try {
+                Candidato atual = opCandidato.get();
+                if(!Objects.equals(atual.getVersaoObjeto(), candidato.getVersaoObjeto())) {
+                    throw new NegocioException("Erro de concorrência. Essa candidato já foi alterado anteriormente!");
+                }
+                BeanUtils.copyProperties(candidato, atual, "id", "nomeFoto","extensao");
+                
+                if(!org.apache.commons.lang3.StringUtils.isBlank(multipartFile.getOriginalFilename())) {
+                    String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+                    String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+                    filedelete = atual.getNomeFoto();
+                    atual.setNomeFoto(fileName.substring(0, fileName.lastIndexOf(".")));
+                    atual.setExtensao(extension);
+                    String nomeArquivo =  atual.getId().toString()+"-"+atual.getNomeFoto();
+                    storageCloudnary.uploadFoto(multipartFile.getBytes(), nomeArquivo);
+                }
+                candidatoRepository.save(atual);
+            } catch (IOException ex) {
+                try {
+                    storageCloudnary.deleteFoto(filedelete);
+                } catch (IOException ex1) {
+                    throw new NegocioException(ex1.getMessage());
+                }
+                throw new NegocioException(ex.getMessage());
             }
-            BeanUtils.copyProperties(candidato, atual, "id");
-            candidatoRepository.save(atual);
         }
     }
 
@@ -66,7 +93,8 @@ public class CandidatoService {
         try {
             candidatoRepository.delete(candidato);
             candidatoRepository.flush();
-        } catch (PersistenceException e) {
+            storageCloudnary.deleteFoto(candidato.getNomeFoto());
+        } catch (PersistenceException | IOException e) {
             throw new NegocioException("Impossível excluir o candidato!");
         }
     }

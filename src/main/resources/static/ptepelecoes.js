@@ -1,8 +1,8 @@
 /* global Swal */
 
-var StoreDrink = StoreDrink || {};
+var Eleicoes = Eleicoes || {};
 
-StoreDrink.DialogoExcluir = (function () {
+Eleicoes.DialogoExcluir = (function () {
 
     function DialogoExcluir() {
         this.exclusaoBtn = $('.js-exclusao-btn');
@@ -61,9 +61,26 @@ StoreDrink.DialogoExcluir = (function () {
 }());
 
 
+Eleicoes.LoadGif = (function () {
+
+    function LoadGif() {}
+    LoadGif.prototype.iniciar = function () {
+        $(document).ajaxSend(function (event, jqxhr, settings) {
+            $("#divLoading").addClass("loading");
+        }.bind(this));
+        $(document).ajaxComplete(function (event, jqxhr, settings) {
+            $("#divLoading").removeClass("loading");
+        }.bind(this));
+    };
+    return LoadGif;
+}());
+
 $(function () {
 
-    var dialogo = new StoreDrink.DialogoExcluir();
+    var dialogo = new Eleicoes.DialogoExcluir();
     dialogo.iniciar();
-
+    
+    
+    var loadGif = new Eleicoes.LoadGif();
+    loadGif.iniciar();
 });

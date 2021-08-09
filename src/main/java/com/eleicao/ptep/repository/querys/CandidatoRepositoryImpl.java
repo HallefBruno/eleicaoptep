@@ -6,7 +6,6 @@ import com.eleicao.ptep.entidade.Cargo;
 import com.eleicao.ptep.entidade.dto.FiltroCandidato;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,6 +15,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -35,12 +35,12 @@ public class CandidatoRepositoryImpl implements CandidatoRepositoryCustom {
         Join<Candidato, Cargo> cargo = (Join) rootEleicao.fetch("cargo", JoinType.LEFT);
         List<Predicate> predicates = new ArrayList<>();
         
-        if(Objects.nonNull(filtroCandidato.getNomeDoCandidato())) {
+        if(!StringUtils.isBlank(filtroCandidato.getNomeDoCandidato())) {
             Predicate pdNome = cb.like(cb.upper(rootEleicao.get("nome")), "%" + filtroCandidato.getNomeDoCandidato().toUpperCase() + "%");
             predicates.add(pdNome);
         }
         
-        if(Objects.nonNull(filtroCandidato.getCargo())) {
+        if(!StringUtils.isBlank(filtroCandidato.getCargo())) {
             Predicate pdCargo = cb.equal(cargo.get("nome"),filtroCandidato.getCargo());
             predicates.add(pdCargo);
         }

@@ -5,6 +5,19 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <th:block th:replace="fragments/CssFragment :: css"></th:block>
+        <style>
+            .circular_image {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                overflow: hidden;
+                display:inline-block;
+                vertical-align:middle;
+            }
+            .circular_image img {
+                width:100%;
+            }
+        </style>
     </head>
     <body>
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
@@ -70,7 +83,7 @@
                     <tr th:each="candidato : ${listaCandidato}">
                         <td th:text="${candidato.nome}">Nome</td>
                         <td th:text="${candidato.cargo.nome}">Cargo</td>
-                        <td><img th:src="@{https://res.cloudinary.com/sud/image/upload/v1628430559/candidato/{id}.{extensao} (id=${candidato.id},extensao=${candidato.extensao})}" /></td>
+                        <td><img class="circular_image" th:src="@{https://res.cloudinary.com/sud/image/upload/candidato/{id}-{nomeFoto}.{extensao} (id=${candidato.id},nomeFoto=${candidato.nomeFoto},extensao=${candidato.extensao})}" /></td>
                         <td style="text-align: center;">
                             <a title="Excluir" data:url="@{/candidato/{codigo}(codigo=${candidato.id})}" data:objeto="${candidato.nome}" class="btn btn-danger btn-sm js-exclusao-btn">
                                 <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
@@ -85,7 +98,7 @@
                     </tr>
                 </tbody>
             </table>
-            
+            <div id="divLoading"></div>
         </div>    
         <th:block th:replace="fragments/JsFragment :: script"></th:block>
         <script type="text/javascript">

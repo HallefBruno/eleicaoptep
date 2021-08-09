@@ -17,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.DynamicUpdate;
 
 /**
  *
@@ -24,6 +25,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @Entity
+@DynamicUpdate
 @EqualsAndHashCode
 public class Candidato implements Serializable {
     
@@ -40,7 +42,7 @@ public class Candidato implements Serializable {
     private String nome;
     
     @JoinColumn
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Cargo cargo;
     
     @Column(nullable = false, name = "nome_foto", unique = true)

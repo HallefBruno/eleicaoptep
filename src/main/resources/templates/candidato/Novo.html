@@ -20,8 +20,14 @@
                                 <div class="col-sm-12 col-md-12 col-12 col-lg-4">
                                     <div class="card border-0"> <!--style="max-width: 200px;"-->
                                         <div class="col-sm-12 col-md-12 col-12 col-lg-12 p-2">
-                                            <img th:src="@{/vendor/images/logoDataA.png}" style="height: 220px; width: 100%;" class="card-img-top rounded img-thumbnail"  alt="Candidato"/>
-                                            <input type="file" required="true" class="form-control mt-1" name="image" accept="image/png,image/jpeg"/>
+                                            <div th:if="${candidato.id == null}">
+                                                <img th:src="@{/vendor/images/logoDataA.png}" style="height: 220px; width: 100%;" class="card-img-top rounded img-thumbnail"  alt="Candidato"/>
+                                                <input type="file" required="true" class="form-control mt-1" name="image" id="image" accept="image/png,image/jpeg"/>
+                                            </div>
+                                            <div th:if="${candidato.id != null}">
+                                                <img th:src="@{https://res.cloudinary.com/sud/image/upload/candidato/{id}-{nomeFoto}.{extensao} (id=${candidato.id},nomeFoto=${candidato.nomeFoto},extensao=${candidato.extensao})}" style="height: 220px; width: 100%;" class="card-img-top rounded img-thumbnail"  alt="Candidato"/>
+                                                <input type="file" class="form-control mt-1" name="image" id="image" accept="image/png,image/jpeg"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -38,6 +44,7 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <input type="hidden" th:field="*{versaoObjeto}" required="true" id="versaoObjeto" name="versaoObjeto"/>
                                     <div class="btn-group mt-3" role="group" aria-label="">
                                         <button type="submit" class="btn btn-sm btn-outline-secondary">
                                             Salvar
