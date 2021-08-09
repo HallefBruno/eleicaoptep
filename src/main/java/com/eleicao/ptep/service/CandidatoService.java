@@ -1,6 +1,6 @@
 package com.eleicao.ptep.service;
 
-import com.eleicao.ptep.coud.StorageCloudnary;
+import com.eleicao.ptep.cloud.StorageCloudnary;
 import com.eleicao.ptep.entidade.Candidato;
 import com.eleicao.ptep.entidade.dto.FiltroCandidato;
 import com.eleicao.ptep.exception.NegocioException;
