@@ -43,6 +43,12 @@
                                                 <option th:each="cargo : ${cargos}" th:value="${cargo.id}" th:text="${cargo.nome}"></option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-12 col-md-12 col-12 col-lg-8 mt-2">
+                                            <label for="eleicoes" class="form-label">Eleições</label>
+                                            <select required="true" class="form-control" th:field="*{eleicao}" id="eleicoes">
+                                                <option th:each="eleicao : ${eleicoes}" th:value="${eleicao.id}" th:text="${eleicao.nome}"></option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <input type="hidden" th:field="*{versaoObjeto}" required="true" id="versaoObjeto" name="versaoObjeto"/>
                                     <div class="btn-group mt-2 p-2" role="group" aria-label="">

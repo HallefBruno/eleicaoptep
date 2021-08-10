@@ -10,12 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.DynamicUpdate;
 
 /**
@@ -33,16 +36,19 @@ public class Candidato implements Serializable {
     @Column(unique = true, nullable = false)
     private Long Id;
     
-    //Poderia ser configurado como unique
     @NotBlank(message = "Nome do candidato não pode ter espaços em branco!")
     @NotEmpty(message = "Nome do candidato não pode ser vazio!")
     @NotNull(message = "Nome do candidato não pode ser null!")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
     
-    @JoinColumn
+    @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Cargo cargo;
+    
+    @JoinColumn(nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Eleicao eleicao;
     
     @Column(nullable = false, name = "nome_foto", unique = true)
     private String nomeFoto;
@@ -53,5 +59,10 @@ public class Candidato implements Serializable {
     @Version
     @Column(name = "versao_objeto", nullable = false)
     private Integer versaoObjeto;
-    
+
+    @PrePersist
+    @PreUpdate
+    private void prePersistPreUpdate() {
+        this.nome = StringUtils.strip(this.nome);
+    }
 }

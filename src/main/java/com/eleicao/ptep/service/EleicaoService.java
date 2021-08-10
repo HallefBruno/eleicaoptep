@@ -5,6 +5,7 @@ import com.eleicao.ptep.entidade.Eleicao;
 import com.eleicao.ptep.entidade.dto.FiltroEleicao;
 import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.repository.EleicaoRepository;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -58,6 +59,10 @@ public class EleicaoService {
     @Transactional
     public List<Eleicao> buscarElecaoPor(FiltroEleicao filtroEleicao) {
         return eleicaoRepository.buscarEleicoesPor(filtroEleicao);
+    }
+    
+    public List<Eleicao> eleicoesValidas() {
+        return eleicaoRepository.findByDataFinalGreaterThanEqual(LocalDate.now());
     }
     
 }

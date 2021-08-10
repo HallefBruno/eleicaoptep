@@ -6,6 +6,7 @@ import com.eleicao.ptep.entidade.dto.FiltroCandidato;
 import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.repository.CandidatoRepository;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -103,4 +104,7 @@ public class CandidatoService {
         return candidatoRepository.buscarCandidatoPor(filtroCandidato);
     }
     
+//    public List<Candidato> eleicoesEmAndamento() {
+//        return candidatoRepository.findByEleicao_DataFinalGreaterThanEqual(LocalDate.now());
+//    }
 }

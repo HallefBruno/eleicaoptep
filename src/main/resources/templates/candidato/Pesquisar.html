@@ -47,15 +47,22 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="mb-3 col-sm-12 col-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4">
+                                            <div class="mb-3 col-sm-12 col-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <label for="nomeDoCandidato" class="form-label">Nome</label>
                                                 <input th:field="*{nomeDoCandidato}" type="text" class="form-control" id="nomeDoCandidato" name="nomeDoCandidato"/>
                                             </div>
-                                            <div class="col-sm-12 col-md-12 col-12 col-lg-6 col-xl-6 col-xxl-4">
+                                            <div class="col-sm-12 col-md-12 col-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <label for="cargos" class="form-label">Cargo</label>
                                                 <select class="form-control" th:field="*{cargo}" id="cargos">
                                                     <option selected="true" style="color: #cccccc;" value="" label="Selecione um cargo"></option>
                                                     <option th:each="cargo : ${cargos}" th:value="${cargo.nome}" th:text="${cargo.nome}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <label for="eleicoes" class="form-label">Eleições</label>
+                                                <select class="form-control" th:field="*{eleicao}" id="eleicoes">
+                                                    <option selected="true" style="color: #cccccc;" value="" label="Selecione uma eleição"></option>
+                                                    <option th:each="eleicao : ${eleicoes}" th:value="${eleicao.nome}" th:text="${eleicao.nome}"></option>
                                                 </select>
                                             </div>
                                         </div>

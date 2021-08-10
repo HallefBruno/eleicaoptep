@@ -6,6 +6,7 @@ import com.eleicao.ptep.entidade.dto.FiltroCandidato;
 import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.service.CandidatoService;
 import com.eleicao.ptep.service.CargoService;
+import com.eleicao.ptep.service.EleicaoService;
 import java.io.IOException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,14 @@ public class CandidatoController {
     @Autowired
     private CandidatoService candidatoService;
     
+    @Autowired
+    private EleicaoService eleicaoService;
+    
     @GetMapping
     public ModelAndView pageCandidato(Candidato candidato) {
         ModelAndView modelAndView = new ModelAndView("candidato/Novo");
         modelAndView.addObject("cargos", cargoService.todos());
+        modelAndView.addObject("eleicoes", eleicaoService.eleicoesValidas());
         return modelAndView;
     }
     
@@ -92,6 +97,7 @@ public class CandidatoController {
     public ModelAndView pesquisar(FiltroCandidato filtroCandidato) {
         ModelAndView mv = new ModelAndView("candidato/Pesquisar");
         mv.addObject("cargos", cargoService.todos());
+        mv.addObject("eleicoes", eleicaoService.eleicoesValidas());
         mv.addObject("listaCandidato", candidatoService.buscarCandidatoPor(filtroCandidato));
         return mv;
     }

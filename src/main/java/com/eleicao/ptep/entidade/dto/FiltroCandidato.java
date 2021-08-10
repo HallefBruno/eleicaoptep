@@ -12,5 +12,6 @@ public class FiltroCandidato {
     
     private String nomeDoCandidato;
     private String cargo;
+    private String eleicao;
     
 }
