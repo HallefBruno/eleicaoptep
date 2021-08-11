@@ -5,46 +5,98 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <th:block th:replace="fragments/CssFragment :: css"></th:block>
+        <style>
+            body{
+                background:#f3f3f3;
+            }
+            
+            .card.user-card {
+                border-top: none;
+                -webkit-box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
+                box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
+                -webkit-transition: all 150ms linear;
+                transition: all 150ms linear;
+            }
+
+            .card {
+                border-radius: 5px;
+                -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                border: none;
+                margin-bottom: 30px;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .card .card-header {
+                background-color: transparent;
+                border-bottom: none;
+                padding: 25px;
+            }
+
+            .card .card-header h5 {
+                margin-bottom: 0;
+                color: #222;
+                font-size: 14px;
+                font-weight: 600;
+                display: inline-block;
+                margin-right: 10px;
+                line-height: 1.4;
+            }
+
+            .card .card-header+.card-block, .card .card-header+.card-block-big {
+                padding-top: 0;
+            }
+
+            .user-card .card-block {
+                text-align: center;
+            }
+
+            .card .card-block {
+                padding: 25px;
+            }
+        </style>
     </head>
     
     <body>
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
-        <div class="container-fluid">
+        <div class="container">
             <th:block th:include="fragments/MensagemSucesso"></th:block>
             <form th:action="${eleicao.id} == null ? @{/eleicao/salvar} : @{/eleicao/update/{codigo}(codigo=${eleicao.id})}" method="post" th:object="${eleicao}">
                 <th:block th:include="fragments/MensagensErroValidacao"></th:block>
-                <div class="shadow-sm bg-body rounded mb-3" style="margin-top: 40px;">
-                    <div class="card">
-                        <h5 class="card-header">Cadastro de eleição</h5>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                    <label for="nome" class="form-label">Nome</label>
-                                    <input type="text" th:field="*{nome}" required="true" class="form-control" id="nome" name="nome"/>
-                                </div>
-                                <div class="mt-2 col-12 col-sm-12 col-md-12 col-lg-12">
-                                    <label for="dataInicio" class="form-label">Data inicio</label>
-                                    <div class="input-group">
-                                        <input type="date" th:field="*{dataInicio}" required="true" class="form-control" id="dataInicio" name="dataInicio"/>
-                                        <span class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                                <div class="mt-2 col-12 col-sm-12 col-md-12 col-lg-12">
-                                    <label for="dataFinal" class="form-label">Data fim</label>
-                                    <div class="input-group">
-                                        <input type="date" th:field="*{dataFinal}" required="true" class="form-control" id="dataFinal" name="dataFinal"/>
-                                        <span class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                                <input type="hidden" th:field="*{versaoObjeto}" required="true" id="versaoObjeto" name="versaoObjeto"/>
+                <div class="row">
+                    <div class="col-md-4 col-sm-8 col-xxl-3 offset-md-4 offset-sm-2 mt-5">
+                        <div class="card user-card">
+                            <div class="card-header">
+                                <h5>Nova eleição</h5>
                             </div>
-                            <div class="btn-group mt-3" role="group" aria-label="">
-                                <button type="submit" class="btn btn-sm btn-outline-secondary">
-                                    Salvar
-                                </button>
-                                <a type="button" th:href="@{/eleicao/pesquisar}" class="btn btn-sm btn-outline-secondary">
-                                    Pesquisar
-                                </a>
+                            <div class="card-block">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <input placeholder="Nome" type="text" th:field="*{nome}" required="true" class="form-control" id="nome" name="nome"/>
+                                    </div>
+                                    <div class="mt-2 col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="input-group">
+                                            <input title="Data de inicio" type="date" th:field="*{dataInicio}" required="true" class="form-control" id="dataInicio" name="dataInicio"/>
+                                            <span class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="input-group">
+                                            <input title="Data final" type="date" th:field="*{dataFinal}" required="true" class="form-control" id="dataFinal" name="dataFinal"/>
+                                            <span class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" th:field="*{versaoObjeto}" required="true" id="versaoObjeto" name="versaoObjeto"/>
+                                </div>
+                                <div class="btn-group mt-3" style="margin-right:100%;" role="group" aria-label="">
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                        Salvar
+                                    </button>
+                                    <a type="button" th:href="@{/eleicao/pesquisar}" class="btn btn-sm btn-outline-secondary">
+                                        Pesquisar
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -52,5 +104,10 @@
             </form>
         </div>
         <th:block th:replace="fragments/JsFragment :: script"></th:block>
+        <script type="text/javascript">
+            $(function () {
+                $("#nome").focus();
+            });
+        </script>
     </body>
 </html>

@@ -55,8 +55,7 @@ public class EleicaoService {
             throw new NegocioException("Impossível excluir a eleição");
         }
     }
-    
-    @Transactional
+
     public List<Eleicao> buscarElecaoPor(FiltroEleicao filtroEleicao) {
         return eleicaoRepository.buscarEleicoesPor(filtroEleicao);
     }

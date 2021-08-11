@@ -46,10 +46,6 @@ public class Candidato implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Cargo cargo;
     
-    @JoinColumn(nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Eleicao eleicao;
-    
     @Column(nullable = false, name = "nome_foto", unique = true)
     private String nomeFoto;
     
@@ -64,5 +60,7 @@ public class Candidato implements Serializable {
     @PreUpdate
     private void prePersistPreUpdate() {
         this.nome = StringUtils.strip(this.nome);
+        this.nomeFoto = StringUtils.strip(this.nomeFoto);
+        this.extensao = StringUtils.strip(this.extensao);
     }
 }

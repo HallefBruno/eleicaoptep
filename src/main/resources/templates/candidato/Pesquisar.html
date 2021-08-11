@@ -17,94 +17,100 @@
             .circular_image img {
                 width:100%;
             }
+            body{
+                background:#f3f3f3;
+            }
+            
+            .card {
+                border-radius: 5px;
+                -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                border: none;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+            }
         </style>
     </head>
     <body>
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
-        
-        <div class="container-fluid">
-            <div th:if="${#lists.isEmpty(listaCandidato)}">
-                <div style="height: 44px; width: 100%;" class="toast align-items-center text-white bg-warning border-0 mt-1 mb-1" data-animation="true" data-autohide="true" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            <p class="">Nenhum candidato encontrado</p>
+        <div class="container">
+            <div class="card p-2 mt-4">
+                <div th:if="${#lists.isEmpty(listaCandidato)}">
+                    <div style="height: 44px; width: 100%;" class="toast align-items-center text-white bg-warning border-0 mt-1 mb-1" data-animation="true" data-autohide="true" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                <p class="">Nenhum candidato encontrado</p>
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                         </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                 </div>
-            </div>
             
-            <form method="GET" th:object="${filtroCandidato}">
-                <div class="accordion shadow-sm mb-2 mt-2 bg-body rounded" id="accordionPesquisar">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Pesquisar
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPesquisar">
-                            <div class="accordion-body">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="mb-3 col-sm-12 col-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <label for="nomeDoCandidato" class="form-label">Nome</label>
-                                                <input th:field="*{nomeDoCandidato}" type="text" class="form-control" id="nomeDoCandidato" name="nomeDoCandidato"/>
+                <form method="GET" th:object="${filtroCandidato}">
+                    <div class="accordion mb-2 mt-2 rounded" id="accordionPesquisar">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Pesquisar
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPesquisar">
+                                <div class="accordion-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="mb-3 col-sm-12 col-12 col-md-12 col-lg-6">
+                                                    <label for="nomeDoCandidato" class="form-label">Nome</label>
+                                                    <input th:field="*{nomeDoCandidato}" type="text" class="form-control" id="nomeDoCandidato" name="nomeDoCandidato"/>
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-12 col-lg-6">
+                                                    <label for="cargos" class="form-label">Cargo</label>
+                                                    <select class="form-control" th:field="*{cargo}" id="cargos">
+                                                        <option selected="true" style="color: #cccccc;" value="" label="Selecione um cargo"></option>
+                                                        <option th:each="cargo : ${cargos}" th:value="${cargo.nome}" th:text="${cargo.nome}"></option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-12 col-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <label for="cargos" class="form-label">Cargo</label>
-                                                <select class="form-control" th:field="*{cargo}" id="cargos">
-                                                    <option selected="true" style="color: #cccccc;" value="" label="Selecione um cargo"></option>
-                                                    <option th:each="cargo : ${cargos}" th:value="${cargo.nome}" th:text="${cargo.nome}"></option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-12 col-md-12 col-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <label for="eleicoes" class="form-label">Eleições</label>
-                                                <select class="form-control" th:field="*{eleicao}" id="eleicoes">
-                                                    <option selected="true" style="color: #cccccc;" value="" label="Selecione uma eleição"></option>
-                                                    <option th:each="eleicao : ${eleicoes}" th:value="${eleicao.nome}" th:text="${eleicao.nome}"></option>
-                                                </select>
-                                            </div>
+                                            <button type="submit" class="btn  btn-primary btn-sm mt-2">Pesquisar</button>
+                                            <a th:href="@{/candidato}" class="btn btn-outline-secondary btn-sm mt-2">Novo</a>
                                         </div>
-                                        <button type="submit" class="btn  btn-primary btn-sm mt-2">Pesquisar</button>
-                                        <a th:href="@{/candidato}" class="btn btn-outline-secondary btn-sm mt-2">Novo</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
             
-            <table id="tbCandidato" class="table table-bordered shadow-sm caption-top mt-4" style="width: 100%">
-                <caption>Lista de candidato</caption>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Cargo</th>
-                        <th>Foto</th>
-                        <th style="text-align: center; width: 100px;">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="candidato : ${listaCandidato}">
-                        <td th:text="${candidato.nome}">Nome</td>
-                        <td th:text="${candidato.cargo.nome}">Cargo</td>
-                        <td><img class="circular_image" th:src="@{https://res.cloudinary.com/sud/image/upload/candidato/{id}-{nomeFoto}.{extensao} (id=${candidato.id},nomeFoto=${candidato.nomeFoto},extensao=${candidato.extensao})}" /></td>
-                        <td style="text-align: center;">
-                            <a title="Excluir" data:url="@{/candidato/{codigo}(codigo=${candidato.id})}" data:objeto="${candidato.nome}" class="btn btn-danger btn-sm js-exclusao-btn">
-                                <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
-                            </a>
-                            <a title="Editar" th:href="@{/candidato/{codigo}(codigo=${candidato.id})}" class="btn btn-info btn-sm text-white">
-                                <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr th:if="${#lists.isEmpty(listaCandidato)}">
-                        <td colspan="4">Nenhum candidato encontrado</td>
-                    </tr>
-                </tbody>
-            </table>
+                <table id="tbCandidato" class="table table-bordered caption-top mt-4" style="width: 100%">
+                    <caption>Lista de candidato</caption>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cargo</th>
+                            <th>Foto</th>
+                            <th style="text-align: center; width: 100px;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="candidato : ${listaCandidato}">
+                            <td th:text="${candidato.nome}">Nome</td>
+                            <td th:text="${candidato.cargo.nome}">Cargo</td>
+                            <td><img class="circular_image" th:src="@{https://res.cloudinary.com/sud/image/upload/candidato/{id}-{nomeFoto}.{extensao} (id=${candidato.id},nomeFoto=${candidato.nomeFoto},extensao=${candidato.extensao})}" /></td>
+                            <td style="text-align: center;">
+                                <a title="Excluir" data:url="@{/candidato/{codigo}(codigo=${candidato.id})}" data:objeto="${candidato.nome}" class="btn btn-danger btn-sm js-exclusao-btn">
+                                    <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                </a>
+                                <a title="Editar" th:href="@{/candidato/{codigo}(codigo=${candidato.id})}" class="btn btn-info btn-sm text-white">
+                                    <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listaCandidato)}">
+                            <td colspan="4">Nenhum candidato encontrado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div id="divLoading"></div>
         </div>    
         <th:block th:replace="fragments/JsFragment :: script"></th:block>

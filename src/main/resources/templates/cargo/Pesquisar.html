@@ -6,75 +6,90 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <th:block th:replace="fragments/CssFragment :: css"></th:block>
+        <style>
+            body{
+                background:#f3f3f3;
+            }
+            
+            .card {
+                border-radius: 5px;
+                -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                border: none;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+            }
+        </style>
     </head>
     <body>
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
-        <div class="container-fluid">
-            <div th:if="${#lists.isEmpty(listaCargo)}">
-                <div style="height: 44px; width: 100%;" class="toast align-items-center text-white bg-warning border-0 mt-1 mb-1" data-animation="true" data-autohide="true" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            <p class="">Nenhum cargo encontrado</p>
+        <div class="container">
+            <div class="card p-2 mt-4">
+                <div th:if="${#lists.isEmpty(listaCargo)}">
+                    <div style="height: 44px; width: 100%;" class="toast align-items-center text-white bg-warning border-0 mt-1 mb-1" data-animation="true" data-autohide="true" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                <p class="">Nenhum cargo encontrado</p>
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                         </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                 </div>
-            </div>
             
-            <form method="GET" th:object="${filtroCargo}">
-                <div class="accordion shadow-sm mb-2 mt-2 bg-body rounded" id="accordionPesquisar">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Pesquisar
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPesquisar">
-                            <div class="accordion-body">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="mb-3 col-12 col-md-12  col-lg-12">
-                                                <label for="nomeDoCargo" class="form-label">Nome</label>
-                                                <input th:field="*{nomeDoCargo}" type="text" class="form-control" id="nomeDoCargo" name="nomeDoCargo"/>
+                <form method="GET" th:object="${filtroCargo}">
+                    <div class="accordion mb-2 mt-2 rounded" id="accordionPesquisar">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Pesquisar
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPesquisar">
+                                <div class="accordion-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="mb-3 col-12 col-md-12  col-lg-12">
+                                                    <label for="nomeDoCargo" class="form-label">Nome</label>
+                                                    <input th:field="*{nomeDoCargo}" type="text" class="form-control" id="nomeDoCargo" name="nomeDoCargo"/>
+                                                </div>
                                             </div>
+                                            <button type="submit" class="btn  btn-primary btn-sm">Pesquisar</button>
+                                            <a th:href="@{/cargo}" class="btn btn-outline-secondary btn-sm">Novo</a>
                                         </div>
-                                        <button type="submit" class="btn  btn-primary btn-sm">Pesquisar</button>
-                                        <a th:href="@{/cargo}" class="btn btn-outline-secondary btn-sm">Novo</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
             
-            <table id="tbCargos" class="table table-bordered shadow-sm caption-top mt-4" style="width: 100%">
-                <caption>Lista de cargos</caption>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th style="text-align: center; width: 100px;">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="cargo : ${listaCargo}">
-                        <td th:text="${cargo.nome}">Nome</td>
-                        <td style="text-align: center;">
-                            <a title="Excluir" data:url="@{/cargo/{codigo}(codigo=${cargo.id})}" data:objeto="${cargo.nome}" class="btn btn-danger btn-sm js-exclusao-btn">
-                                <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
-                            </a>
-                            <a title="Editar" th:href="@{/cargo/{codigo}(codigo=${cargo.id})}" class="btn btn-info btn-sm text-white">
-                                <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr th:if="${#lists.isEmpty(listaCargo)}">
-                        <td colspan="4">Nenhum cargo encontrado</td>
-                    </tr>
-                </tbody>
-            </table>
-            
+                <table id="tbCargos" class="table table-bordered caption-top mt-4" style="width: 100%">
+                    <caption>Lista de cargos</caption>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th style="text-align: center; width: 100px;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cargo : ${listaCargo}">
+                            <td th:text="${cargo.nome}">Nome</td>
+                            <td style="text-align: center;">
+                                <a title="Excluir" data:url="@{/cargo/{codigo}(codigo=${cargo.id})}" data:objeto="${cargo.nome}" class="btn btn-danger btn-sm js-exclusao-btn">
+                                    <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                </a>
+                                <a title="Editar" th:href="@{/cargo/{codigo}(codigo=${cargo.id})}" class="btn btn-info btn-sm text-white">
+                                    <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listaCargo)}">
+                            <td colspan="4">Nenhum cargo encontrado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <th:block th:replace="fragments/JsFragment :: script"></th:block>
         <script type="text/javascript">

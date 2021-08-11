@@ -1,4 +1,6 @@
 $(function () {
+    $("#nome").focus();
+    
     $("input[name=image]").change(function () {
         if (this.files && this.files[0]) {
             var reader = new FileReader();

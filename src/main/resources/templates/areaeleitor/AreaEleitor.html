@@ -22,35 +22,17 @@
     </head>
 <body>
     <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
-    <div class="container-fluid mt-4">
-        <h3 class="pb-2 border-bottom">Eleições ocorrendo agora<span style="margin-left:10px;"><i class="fa fa-clock-o" aria-hidden="true"></i></span></h3>
-        <div class="row mt-4">
-            <th:block th:each="eleicoes : ${eleicoesCandidatos}">
-                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3">
-                    <div class="card shadow-lg p-1">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1" th:text="${eleicoes.key}">Cargo</h5>
-                                    <small>10/10/2021</small>
-                                </div>
-                            </a>
-                            <th:block th:each="candidato : ${eleicoes.value}">
-                                <div class="list-group-item">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <label class="list-group-item border-0">
-                                            <input class="form-check-input me-1" th:text="${candidato.nome}" type="checkbox" th:value="${candidato.nome}">
-                                        </label>
-                                        <img class="circular_image" width="30px;" height="30px;" th:src="@{https://res.cloudinary.com/sud/image/upload/candidato/{id}-{nomeFoto}.{extensao} (id=${candidato.id},nomeFoto=${candidato.nomeFoto},extensao=${candidato.extensao})}" />
-                                    </div>
-                                </div>
-                            </th:block>
-                        </div>
-                    </div>
-                </div>
+    <th:block th:each="eleicao : ${listaEleicoes}">
+        <p>[[${eleicao.nome}]]</p>
+        <th:block th:each="eleicoesCandidato : ${eleicoesCandidatos}">
+            <p th:text="${eleicoesCandidato.key}">keyvalue</p>
+            <th:block th:each="eleicoesCandidato : ${eleicoesCandidato.value}">
+                <th:block th:each="candidatos : ${eleicoesCandidato}">
+                    <p>[[${candidatos.nome}]]</p>
+                </th:block>
             </th:block>
-        </div>
-    </div>
-<th:block th:replace="fragments/JsFragment :: script"></th:block>
+        </th:block>
+    </th:block>
+    <th:block th:replace="fragments/JsFragment :: script"></th:block>
 </body>
 </html>

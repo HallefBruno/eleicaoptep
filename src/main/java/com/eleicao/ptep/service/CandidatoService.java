@@ -103,8 +103,5 @@ public class CandidatoService {
     public List<Candidato> buscarCandidatoPor(FiltroCandidato filtroCandidato) {
         return candidatoRepository.buscarCandidatoPor(filtroCandidato);
     }
-    
-//    public List<Candidato> eleicoesEmAndamento() {
-//        return candidatoRepository.findByEleicao_DataFinalGreaterThanEqual(LocalDate.now());
-//    }
+
 }

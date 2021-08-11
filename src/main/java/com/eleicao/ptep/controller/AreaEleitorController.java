@@ -26,10 +26,14 @@ public class AreaEleitorController {
     @Autowired
     private CandidatoRepository candidatoRepository;
     
+    @Autowired
+    private EleicaoService eleicaoService;
+    
     @GetMapping
     public ModelAndView pageAreaEleitor(Voto voto) {
         ModelAndView mv = new ModelAndView("areaeleitor/AreaEleitor");
         mv.addObject("eleicoesCandidatos", candidatoRepository.mapCandidatosPorCargo());
+        mv.addObject("listaEleicoes", eleicaoService.eleicoesValidas());
         return mv;
     }
     
