@@ -59,15 +59,15 @@
     </head>
     <body>
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
-        <div class="container">
+        <div class="container mt-5">
             <th:block th:include="fragments/MensagemSucesso"></th:block>
             <form th:action="${cargo.id} == null ? @{/cargo/salvar} : @{/cargo/update/{codigo}(codigo=${cargo.id})}" method="post" th:object="${cargo}">
                 <th:block th:include="fragments/MensagensErroValidacao"></th:block>
                     <div class="row">
-                    <div class="col-md-4 col-sm-8 col-xxl-3 offset-md-4 offset-sm-2 mt-5">
+                    <div class="col-md-4 col-sm-8 col-xxl-3 offset-md-4 offset-sm-2">
                         <div class="card user-card">
                             <div class="card-header">
-                                <h5>Novo cargo</h5>
+                                <h5 th:text="${cargo.id} == null ? 'Novo cargo': 'Edição de cargo' "></h5>
                             </div>
                             <div class="card-block">
                                 <div class="row">

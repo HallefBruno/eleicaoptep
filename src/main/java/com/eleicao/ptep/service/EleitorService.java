@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
  * @author hallef
  */
 @Service
-public class VotoService {
+public class EleitorService {
     
 }

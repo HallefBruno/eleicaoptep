@@ -48,7 +48,7 @@ public class Eleicao implements Serializable {
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Data final é obrigatória!")
-    @Column(nullable = false, name = "data_final")
+    @Column(nullable = false, name = "data_final", unique = true)
     private LocalDate dataFinal;
     
     @Version

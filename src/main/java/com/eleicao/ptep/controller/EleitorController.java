@@ -1,11 +1,11 @@
 
 package com.eleicao.ptep.controller;
 
-import com.eleicao.ptep.entidade.Voto;
+import com.eleicao.ptep.entidade.Eleitor;
 import com.eleicao.ptep.repository.CandidatoRepository;
 import com.eleicao.ptep.service.CandidatoService;
 import com.eleicao.ptep.service.EleicaoService;
-import com.eleicao.ptep.service.VotoService;
+import com.eleicao.ptep.service.EleitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("votar")
-public class AreaEleitorController {
+public class EleitorController {
     
     @Autowired
-    private VotoService votoService;
+    private EleitorService votoService;
     
     @Autowired
     private CandidatoRepository candidatoRepository;
@@ -30,7 +30,7 @@ public class AreaEleitorController {
     private EleicaoService eleicaoService;
     
     @GetMapping
-    public ModelAndView pageAreaEleitor(Voto voto) {
+    public ModelAndView pageAreaEleitor(Eleitor eleitor) {
         ModelAndView mv = new ModelAndView("areaeleitor/AreaEleitor");
         mv.addObject("eleicoesCandidatos", candidatoRepository.mapCandidatosPorCargo());
         mv.addObject("listaEleicoes", eleicaoService.eleicoesValidas());

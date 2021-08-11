@@ -10,7 +10,7 @@
     </symbol>
 </svg>
 
-<div class="mt-1 alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert" th:if="${not #strings.isEmpty(mensagem)}">
+<div class="mt-1 col-md-4 col-sm-8 col-xxl-3 offset-md-4 offset-sm-2 alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert" th:if="${not #strings.isEmpty(mensagem)}">
     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
     <span th:text="${mensagem}"></span>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

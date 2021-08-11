@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface EleicaoRepository extends JpaRepository<Eleicao, Long>, EleicaoRepositoryCustom {
-    List<Eleicao> findByDataFinalGreaterThanEqual(LocalDate atual);
+    List<Eleicao> findFirstByDataFinalGreaterThanEqualOrderByDataFinalAsc(LocalDate atual);
 }

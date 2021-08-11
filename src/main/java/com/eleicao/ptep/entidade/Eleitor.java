@@ -26,7 +26,7 @@ import org.hibernate.validator.constraints.br.CPF;
 @Data
 @Entity
 @EqualsAndHashCode
-public class Voto implements Serializable {
+public class Eleitor implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,11 +50,8 @@ public class Voto implements Serializable {
     private String protocolo;
     
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "voto_candidato",joinColumns = @JoinColumn(name = "voto_id"),inverseJoinColumns = @JoinColumn(name = "candidato_id"))
+    @JoinTable(name = "eleitor_candidato",joinColumns = @JoinColumn(name = "eleitor_id"),inverseJoinColumns = @JoinColumn(name = "candidato_id"))
     private Set<Candidato> candidatos;
-    
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "voto_eleicao",joinColumns = @JoinColumn(name = "voto_id"),inverseJoinColumns = @JoinColumn(name = "eleicao_id"))
-    private Set<Eleicao> eleicoes;
+
     
 }

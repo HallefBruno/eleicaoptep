@@ -75,6 +75,34 @@ Eleicoes.LoadGif = (function () {
     return LoadGif;
 }());
 
+Eleicoes.MessageToast = (function () {
+    
+    function MessageToast() {};
+    
+    MessageToast.prototype.show = function (icon,message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 8000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        Toast.fire({
+            icon: `${icon}`,
+            text: `${message}`
+        });
+    };
+    
+    return MessageToast;
+    
+}());
+
+
 $(function () {
 
     var dialogo = new Eleicoes.DialogoExcluir();

@@ -6,6 +6,7 @@ import com.eleicao.ptep.entidade.dto.FiltroEleicao;
 import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.repository.EleicaoRepository;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -61,7 +62,6 @@ public class EleicaoService {
     }
     
     public List<Eleicao> eleicoesValidas() {
-        return eleicaoRepository.findByDataFinalGreaterThanEqual(LocalDate.now());
+        return eleicaoRepository.findFirstByDataFinalGreaterThanEqualOrderByDataFinalAsc(LocalDate.now());
     }
-    
 }

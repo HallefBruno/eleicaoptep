@@ -1,15 +1,53 @@
 <!DOCTYPE html>
-
-<html>
+<html class="h-100">
     <head>
         <title>Erro</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <th:block th:replace="fragments/CssFragment :: css"></th:block>
+        <style>
+            .container {
+                width: auto;
+                max-width: 680px;
+                padding: 0 15px;
+            }
+        </style>
     </head>
-    <body>
-        <h1>Página de erro</h1>
-        <p>Desculpe por isso...</p>
-        Failed URL: [[${url}]]
-        Exception:  [[${exception.message}]]
+    <body class="d-flex flex-column h-100">
+
+        <main class="flex-shrink-0">
+            <div class="container">
+                <h1 class="mt-5">Leia com atenção</h1>
+                <p class="lead">Notificação:  [[${exception}]]</p>
+                <p>Caso não esteja compreendendo fale conosco <a target="_blank" href="https://www.dataa.com.br/">Aqui</a></p>
+                <button type="button" onclick="history.back();" class="btn btn-danger btn-sm">Voltar</button>
+            </div>
+        </main>
+
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container">
+                <span class="text-muted">Todos os direitos reservados</span>
+            </div>
+        </footer>
+        
     </body>
 </html>
+
+<!--<html>
+    <head>
+        <title>Erro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <th:block th:replace="fragments/CssFragment :: css"></th:block>
+    </head>
+    <body style="background-color: #f3f3f3;">
+        <div class="container">
+            <h3 class="text-center">Atenção <span class="ml-1"><i class="fa fa-exclamation" aria-hidden="true"></i></span></h3>
+            <div class="card">
+                <span>Página: [[${url}]]</span><br>
+                <span>Notificação:  [[${exception}]]</span>
+            </div>
+        </div>
+        <th:block th:replace="fragments/JsFragment :: script"></th:block>
+    </body>
+</html>-->

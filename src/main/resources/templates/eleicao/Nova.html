@@ -60,15 +60,15 @@
     
     <body>
         <div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
-        <div class="container">
+        <div class="container mt-5">
             <th:block th:include="fragments/MensagemSucesso"></th:block>
-            <form th:action="${eleicao.id} == null ? @{/eleicao/salvar} : @{/eleicao/update/{codigo}(codigo=${eleicao.id})}" method="post" th:object="${eleicao}">
+            <form id="formCadastro" th:action="${eleicao.id} == null ? @{/eleicao/salvar} : @{/eleicao/update/{codigo}(codigo=${eleicao.id})}" method="post" th:object="${eleicao}">
                 <th:block th:include="fragments/MensagensErroValidacao"></th:block>
                 <div class="row">
-                    <div class="col-md-4 col-sm-8 col-xxl-3 offset-md-4 offset-sm-2 mt-5">
+                    <div class="col-md-4 col-sm-8 col-xxl-3 offset-md-4 offset-sm-2">
                         <div class="card user-card">
                             <div class="card-header">
-                                <h5>Nova eleição</h5>
+                                <h5 th:text="${eleicao.id} == null ? 'Nova eleição': 'Edição de eleição' "></h5>
                             </div>
                             <div class="card-block">
                                 <div class="row">
@@ -77,14 +77,12 @@
                                     </div>
                                     <div class="mt-2 col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="input-group">
-                                            <input title="Data de inicio" type="date" th:field="*{dataInicio}" required="true" class="form-control" id="dataInicio" name="dataInicio"/>
-                                            <span class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
+                                            <input data-bs-toggle="tooltip" data-bs-placement="right" title="Data inicial" type="date" th:field="*{dataInicio}" required="true" class="form-control" id="dataInicio" name="dataInicio"/>
                                         </div>
                                     </div>
                                     <div class="mt-2 col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="input-group">
-                                            <input title="Data final" type="date" th:field="*{dataFinal}" required="true" class="form-control" id="dataFinal" name="dataFinal"/>
-                                            <span class="input-group-text"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
+                                            <input data-bs-toggle="tooltip" data-bs-placement="right" title="Data final" type="date" th:field="*{dataFinal}" required="true" class="form-control" id="dataFinal" name="dataFinal"/>
                                         </div>
                                     </div>
                                     <input type="hidden" th:field="*{versaoObjeto}" required="true" id="versaoObjeto" name="versaoObjeto"/>
@@ -104,10 +102,6 @@
             </form>
         </div>
         <th:block th:replace="fragments/JsFragment :: script"></th:block>
-        <script type="text/javascript">
-            $(function () {
-                $("#nome").focus();
-            });
-        </script>
+        <script th:src="@{/jsprojeto/eleicao/Eleicao.js}" type="text/javascript"></script>
     </body>
 </html>
