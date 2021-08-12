@@ -4,10 +4,11 @@ package com.eleicao.ptep.controller;
 import com.eleicao.ptep.entidade.Candidato;
 import com.eleicao.ptep.entidade.dto.FiltroCandidato;
 import com.eleicao.ptep.exception.NegocioException;
+import com.eleicao.ptep.relatorio.RelatorioService;
 import com.eleicao.ptep.service.CandidatoService;
 import com.eleicao.ptep.service.CargoService;
-import com.eleicao.ptep.service.EleicaoService;
 import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,9 @@ public class CandidatoController {
     
     @Autowired
     private CandidatoService candidatoService;
+    
+    @Autowired
+    private RelatorioService relatorioService;
     
     @GetMapping
     public ModelAndView pageCandidato(Candidato candidato) {
@@ -102,6 +106,11 @@ public class CandidatoController {
         ModelAndView mv = pageCandidato(candidato);
         mv.addObject(candidato);
         return mv;
+    }
+    
+    @GetMapping("/rel/final")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        relatorioService.gerarFinal(response);
     }
     
 }
