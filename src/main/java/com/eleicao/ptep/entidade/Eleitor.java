@@ -11,13 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.validator.constraints.br.CPF;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -39,19 +42,23 @@ public class Eleitor implements Serializable {
     @Column(nullable = false)
     private String nome;
     
-    @CPF
     @NotBlank(message = "CPF do(a) votante não pode ter espaços em branco!")
     @NotEmpty(message = "CPF do(a) votante não pode ser vazio!")
     @NotNull(message = "CPF do(a) votante não pode ser null!")
-    @Column(nullable = false, name = "cpf", unique = true)
+    @Column(nullable = false, name = "cpf")
     private String cpf;
     
-    @Column(nullable = false, name = "protocolo", unique = true)
+    @Column(nullable = false, name = "protocolo")
     private String protocolo;
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "eleitor_candidato",joinColumns = @JoinColumn(name = "eleitor_id"),inverseJoinColumns = @JoinColumn(name = "candidato_id"))
     private Set<Candidato> candidatos;
 
-    
+    @PrePersist
+    @PreUpdate
+    private void prePersistPreUpdate() {
+        this.nome = StringUtils.strip(this.nome);
+        this.cpf = StringUtils.getDigits(this.cpf);
+    }
 }

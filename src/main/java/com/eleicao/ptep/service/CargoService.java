@@ -55,7 +55,7 @@ public class CargoService {
         try {
             cargoRepository.delete(cargo);
             cargoRepository.flush();
-        } catch (PersistenceException e) {
+        } catch (Exception ex) {
             throw new NegocioException("Impossível excluir o cargo!");
         }
     }

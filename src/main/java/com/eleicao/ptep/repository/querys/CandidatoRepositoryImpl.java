@@ -60,8 +60,9 @@ public class CandidatoRepositoryImpl implements CandidatoRepositoryCustom {
         Map<String,List<Candidato>> mapCandidados = new LinkedHashMap<>();
         CriteriaBuilder cb = manager.getCriteriaBuilder();
         CriteriaQuery<Candidato> q = cb.createQuery(Candidato.class);
-        Root<Candidato> c = q.from(Candidato.class);
-        q.select(c);
+        Root<Candidato> candidato = q.from(Candidato.class);
+        candidato.fetch("cargo");
+        q.select(candidato);
         TypedQuery<Candidato> query = manager.createQuery(q);
         List<Candidato> candidatos = query.getResultList();
         List<Candidato> listaCandidatosPorCargo = new LinkedList<>();

@@ -95,7 +95,7 @@ public class CandidatoService {
             candidatoRepository.delete(candidato);
             candidatoRepository.flush();
             storageCloudnary.deleteFoto(candidato.getNomeFoto());
-        } catch (PersistenceException | IOException e) {
+        } catch (Exception ex) {
             throw new NegocioException("Impossível excluir o candidato!");
         }
     }

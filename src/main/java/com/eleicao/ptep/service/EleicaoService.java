@@ -6,11 +6,9 @@ import com.eleicao.ptep.entidade.dto.FiltroEleicao;
 import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.repository.EleicaoRepository;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import javax.persistence.PersistenceException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,16 +50,16 @@ public class EleicaoService {
         try {
             eleicaoRepository.delete(eleicao);
             eleicaoRepository.flush();
-        } catch (PersistenceException e) {
+        } catch (Exception ex) {
             throw new NegocioException("Impossível excluir a eleição");
         }
     }
 
-    public List<Eleicao> buscarElecaoPor(FiltroEleicao filtroEleicao) {
+    public List<Eleicao> buscarEleicaoPor(FiltroEleicao filtroEleicao) {
         return eleicaoRepository.buscarEleicoesPor(filtroEleicao);
     }
     
-    public List<Eleicao> eleicoesValidas() {
+    public Eleicao eleicaoAtaul() {
         return eleicaoRepository.findFirstByDataFinalGreaterThanEqualOrderByDataFinalAsc(LocalDate.now());
     }
 }

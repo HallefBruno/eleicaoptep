@@ -5,11 +5,8 @@ import com.eleicao.ptep.entidade.Eleicao;
 import com.eleicao.ptep.entidade.dto.FiltroEleicao;
 import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.service.EleicaoService;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -87,7 +84,7 @@ public class EleicaoController {
     @GetMapping("pesquisar")
     public ModelAndView pesqisar(FiltroEleicao filtroEleicao) {
         ModelAndView mv = new ModelAndView("eleicao/Pesquisar");
-        mv.addObject("listaEleicao", eleicaoService.buscarElecaoPor(filtroEleicao));
+        mv.addObject("listaEleicao", eleicaoService.buscarEleicaoPor(filtroEleicao));
         return mv;
     }
     
