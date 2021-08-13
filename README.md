@@ -3,7 +3,7 @@
 ## Conteudo
 * [Sobre](#general-info)
 * [Funcionalidades](#technologies)
-* [Tecnologias](#setup)
+* [Tecnologias](#-tecnologias)
 * [Teste online](#teste-online)
 * [Observações](#teste-online)
 
@@ -35,7 +35,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ### Teste Online
 - [Pode ser feito aqui](http://eleicaoptep.herokuapp.com/ptepeleicoes/)
 
-´´´
-Observações:
-> Pardon my French
-´´´
+
+
+#### Observações:
+> O sistema não pega a data do computador do usuário e sim do servidor hospedado.
