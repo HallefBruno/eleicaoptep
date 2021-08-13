@@ -1,8 +1,13 @@
 # eleicaoptep
-## Table of contents
-* [General info](#general-info)
-* [Technologies](#technologies)
-* [Setup](#setup)
+
+### Funcionalidades
+
+- [x] Manter eleição
+- [x] Manter cargo
+- [x] Manter candidato
+- [x] Votação
+- [x] Relatório 
+
 
 ## General info
 This project is simple Lorem ipsum dolor generator.
