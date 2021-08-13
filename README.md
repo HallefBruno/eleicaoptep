@@ -2,12 +2,13 @@
 
 ## Conteudo
 * [Sobre](#sobre)
-* [Estimativa de horas](#estimativa-horas)
-     - [Criação e configuração do projeto](#estimativa-horas)
-     - [Manter eleição](#estimativa-horas)
-     - [Manter cargo](#estimativa-horas)
-     - [Votação](#estimativa-horas)
-     - [Relatórios](#estimativa-horas)
+* [Estimativa de horas](#estimativa-de-horas)
+     - [Criação e configuração do projeto](#estimativa-de-horas)
+     - [Manter eleição](#estimativa-de-horas)
+     - [Manter cargo](#estimativa-de-horas)
+     - [Manter candidato](#estimativa-de-horas)
+     - [Votação](#estimativa-de-horas)
+     - [Relatórios](#estimativa-de-horas)
 * [Funcionalidades](#funcionalidades)
 * [Tecnologias](#-tecnologias)
 * [Teste online](#teste-online)
@@ -21,7 +22,12 @@ complementar e que desejam realizar eleições para preencher cargos de dentro d
 entidade
 
 ## Estimativa de horas
-   - [Criação e configuração do projeto 3 horas]	
+   - Criação e configuração do projeto 4 horas
+   - Manter eleição 4 horas
+   - Manter cargo 3 horas
+   - Manter candidato 8 horas
+   - Votacao 16 horas
+   - Relatorio 4 horas
 
 ### Funcionalidades
 
