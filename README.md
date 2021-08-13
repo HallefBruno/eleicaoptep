@@ -4,6 +4,8 @@
 * [Sobre](#general-info)
 * [Funcionalidades](#technologies)
 * [Tecnologias](#setup)
+* [Teste online](#teste-online)
+* [Observações](#teste-online)
 
 
 ## Sobre
