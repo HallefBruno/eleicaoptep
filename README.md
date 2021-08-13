@@ -20,6 +20,9 @@ O aplicativo tem como público alvo pessoas que trabalham dentro de entidades de
 complementar e que desejam realizar eleições para preencher cargos de dentro da própria
 entidade
 
+## Estimativa de horas
+   - [Criação e configuração do projeto 3 horas]	
+
 ### Funcionalidades
 
 - [x] Manter eleição
