@@ -30,6 +30,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 - [Jquery](https://jquery.com/)
 	
-## Setup
-- [Pode ser visto em: ](http://eleicaoptep.herokuapp.com/ptepeleicoes/)
+### Teste Online
+- [Pode ser feito aqui](http://eleicaoptep.herokuapp.com/ptepeleicoes/)
 
