@@ -9,8 +9,11 @@
 - [x] Relatório 
 
 
-## General info
-This project is simple Lorem ipsum dolor generator.
+## Sobre
+Público alvo
+O aplicativo tem como público alvo pessoas que trabalham dentro de entidades de previdência
+complementar e que desejam realizar eleições para preencher cargos de dentro da própria
+entidade
 	
 ## Technologies
 Project is created with:
