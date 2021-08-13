@@ -26,6 +26,9 @@ public class EleicaoService {
     
     @Transactional
     public void salvar(Eleicao eleicao) {
+        if(eleicao.getDataFinal().isBefore(LocalDate.now())) {
+            throw new NegocioException("A data final precisa ser maior ou igual a data atual!");
+        }
         eleicaoRepository.save(eleicao);
     }
     
@@ -60,6 +63,10 @@ public class EleicaoService {
     }
     
     public Eleicao eleicaoAtaul() {
-        return eleicaoRepository.findFirstByDataFinalGreaterThanEqualOrderByDataFinalAsc(LocalDate.now());
+        try {
+            return eleicaoRepository.findByEleicaoOrderByDataFinalAsc();
+        }catch(Exception ex) {
+            throw new NegocioException("Nenhuma eleição cadastrada!");
+        }
     }
 }

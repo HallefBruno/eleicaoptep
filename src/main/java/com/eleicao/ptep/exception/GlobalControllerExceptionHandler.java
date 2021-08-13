@@ -31,6 +31,8 @@ class GlobalDefaultExceptionHandler {
             }
         } else if (ex instanceof NullPointerException) {
             mav.addObject("exception", "Erro grave, favor entrar em contato com Admin do sistema!");
+        } else if (ex instanceof NegocioException) {
+            mav.addObject("exception", ex.getMessage());
         }
         mav.addObject("url", req.getRequestURL());
         mav.setViewName(DEFAULT_ERROR_VIEW);

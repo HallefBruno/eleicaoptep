@@ -1,5 +1,5 @@
 
-package com.eleicao.ptep.relatorio;
+package com.eleicao.ptep.relatorio.dto;
 
 import lombok.Builder;
 import lombok.Data;

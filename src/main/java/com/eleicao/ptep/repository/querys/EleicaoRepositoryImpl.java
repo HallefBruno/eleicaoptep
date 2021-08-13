@@ -2,6 +2,7 @@ package com.eleicao.ptep.repository.querys;
 
 import com.eleicao.ptep.entidade.Eleicao;
 import com.eleicao.ptep.entidade.dto.FiltroEleicao;
+import com.eleicao.ptep.exception.NegocioException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -49,6 +50,18 @@ public class EleicaoRepositoryImpl implements EleicaoRepositoryCustom {
         query.where(predicates.toArray(new Predicate[]{}));
         TypedQuery<Eleicao> typedQuery = manager.createQuery(query);
         return typedQuery.getResultList();
+    }
+
+    @Override
+    public Eleicao findByEleicaoOrderByDataFinalAsc() {
+        CriteriaBuilder cb = manager.getCriteriaBuilder();
+        CriteriaQuery<Eleicao> query = cb.createQuery(Eleicao.class);
+        Root<Eleicao> rootEleicao = query.from(Eleicao.class);
+        query.select(rootEleicao);
+        query.orderBy(cb.asc(rootEleicao.get("dataFinal")));
+        TypedQuery<Eleicao> typedQuery = manager.createQuery(query);
+        typedQuery.setMaxResults(1);
+        return typedQuery.getSingleResult();
     }
 
 }

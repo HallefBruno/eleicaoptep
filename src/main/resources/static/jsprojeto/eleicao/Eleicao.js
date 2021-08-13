@@ -11,6 +11,6 @@ $(function () {
                 new Eleicoes.MessageToast().show("warning","Por favor conferir as datas!");
                 return false;
             }
-        }
+        } 
     });
 });

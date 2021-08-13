@@ -6,6 +6,7 @@ import com.eleicao.ptep.exception.NegocioException;
 import com.eleicao.ptep.repository.CandidatoRepository;
 import com.eleicao.ptep.service.EleicaoService;
 import com.eleicao.ptep.service.EleitorService;
+import java.time.LocalDate;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

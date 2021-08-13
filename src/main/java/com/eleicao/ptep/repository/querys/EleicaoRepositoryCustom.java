@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface EleicaoRepositoryCustom {
     List<Eleicao> buscarEleicoesPor(FiltroEleicao filtroEleicao);
+    Eleicao findByEleicaoOrderByDataFinalAsc();
 }

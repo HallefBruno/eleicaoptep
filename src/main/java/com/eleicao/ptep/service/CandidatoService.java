@@ -55,7 +55,7 @@ public class CandidatoService {
     
     @Transactional
     public void update(Candidato candidato, Long codigo, MultipartFile multipartFile) {
-        String filedelete = "";
+        String nomeArquivo = "";
         if (Objects.isNull(codigo)) {
             throw new NegocioException("Código não pode ser null!");
         }
@@ -71,16 +71,16 @@ public class CandidatoService {
                 if(!org.apache.commons.lang3.StringUtils.isBlank(multipartFile.getOriginalFilename())) {
                     String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
                     String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-                    filedelete = atual.getNomeFoto();
+                    nomeArquivo = atual.getNomeFoto();
                     atual.setNomeFoto(fileName.substring(0, fileName.lastIndexOf(".")));
                     atual.setExtensao(extension);
-                    String nomeArquivo =  atual.getId().toString()+"-"+atual.getNomeFoto();
-                    storageCloudnary.uploadFoto(multipartFile.getBytes(), nomeArquivo);
+                    String arquivo =  atual.getId().toString()+"-"+atual.getNomeFoto();
+                    storageCloudnary.uploadFoto(multipartFile.getBytes(), arquivo);
                 }
                 candidatoRepository.save(atual);
             } catch (IOException ex) {
                 try {
-                    storageCloudnary.deleteFoto(filedelete);
+                    storageCloudnary.deleteFoto(nomeArquivo);
                 } catch (IOException ex1) {
                     throw new NegocioException(ex1.getMessage());
                 }

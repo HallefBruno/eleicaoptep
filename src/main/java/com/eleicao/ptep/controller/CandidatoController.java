@@ -41,9 +41,6 @@ public class CandidatoController {
     @Autowired
     private CandidatoService candidatoService;
     
-    @Autowired
-    private RelatorioService relatorioService;
-    
     @GetMapping
     public ModelAndView pageCandidato(Candidato candidato) {
         ModelAndView modelAndView = new ModelAndView("candidato/Novo");
@@ -107,10 +104,5 @@ public class CandidatoController {
         mv.addObject(candidato);
         return mv;
     }
-    
-    @GetMapping("/rel/final")
-    public void exportToCSV(HttpServletResponse response) throws IOException {
-        relatorioService.gerarFinal(response);
-    }
-    
+
 }
