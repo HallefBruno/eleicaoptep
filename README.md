@@ -1,8 +1,8 @@
 # eleicaoptep
 
 ## Conteudo
-* [Sobre](#general-info)
-* [Funcionalidades](#technologies)
+* [Sobre](#sobre)
+* [Funcionalidades](#funcionalidades)
 * [Tecnologias](#-tecnologias)
 * [Teste online](#teste-online)
 * [Observações](#teste-online)
