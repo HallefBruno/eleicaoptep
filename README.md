@@ -1,12 +1,9 @@
 # eleicaoptep
 
-### Funcionalidades
-
-- [x] Manter eleição
-- [x] Manter cargo
-- [x] Manter candidato
-- [x] Votação
-- [x] Relatório 
+## Table of contents
+* [Sobre](#general-info)
+* [Funcionalidades](#technologies)
+* [Tecnologias](#setup)
 
 
 ## Sobre
@@ -14,7 +11,14 @@ Público alvo
 O aplicativo tem como público alvo pessoas que trabalham dentro de entidades de previdência
 complementar e que desejam realizar eleições para preencher cargos de dentro da própria
 entidade
-	
+
+### Funcionalidades
+
+- [x] Manter eleição
+- [x] Manter cargo
+- [x] Manter candidato
+- [x] Votação
+- [x] Relatório 
 
 ### 🛠 Tecnologias
 
