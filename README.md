@@ -15,11 +15,16 @@ O aplicativo tem como público alvo pessoas que trabalham dentro de entidades de
 complementar e que desejam realizar eleições para preencher cargos de dentro da própria
 entidade
 	
-## Technologies
-Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
+
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [OpenJdk 8](https://developers.redhat.com/products/openjdk/download?sc_cid7013a000002wKHtAAM/)
+- [Spring](https://start.spring.io/)
+- [Thymeleaf](https://www.thymeleaf.org/)
+- [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- [Jquery](https://jquery.com/)
 	
 ## Setup
 To run this project, install it locally using npm:
