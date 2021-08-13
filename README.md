@@ -33,3 +33,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ### Teste Online
 - [Pode ser feito aqui](http://eleicaoptep.herokuapp.com/ptepeleicoes/)
 
+´´´
+Observações:
+> Pardon my French
+´´´
