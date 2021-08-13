@@ -3,8 +3,11 @@
 ## Conteudo
 * [Sobre](#sobre)
 * [Estimativa de horas](#estimativa-horas)
-     - Primeiro item de lista aninhado
-     - Segundo item de lista aninhada
+     - [Criação e configuração do projeto](#estimativa-horas)
+     - [Manter eleição](#estimativa-horas)
+     - [Manter cargo](#estimativa-horas)
+     - [Votação](#estimativa-horas)
+     - [Relatórios](#estimativa-horas)
 * [Funcionalidades](#funcionalidades)
 * [Tecnologias](#-tecnologias)
 * [Teste online](#teste-online)
