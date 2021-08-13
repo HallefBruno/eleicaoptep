@@ -31,10 +31,5 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Jquery](https://jquery.com/)
 	
 ## Setup
-To run this project, install it locally using npm:
+- [Pode ser visto em: ](http://eleicaoptep.herokuapp.com/ptepeleicoes/)
 
-```
-$ cd ../lorem
-$ npm install
-$ npm start
-```
