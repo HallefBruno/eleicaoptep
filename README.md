@@ -1,6 +1,6 @@
 # eleicaoptep
 
-## Table of contents
+## Conteudo
 * [Sobre](#general-info)
 * [Funcionalidades](#technologies)
 * [Tecnologias](#setup)
