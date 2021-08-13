@@ -38,4 +38,4 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 
 #### Observações:
-> O sistema não pega a data do computador do usuário e sim do servidor hospedado.
+> O sistema não pega a data do computador do usuário e sim do servidor hospedado. Para fim de teste, cadastre uma eleição com a data final anterior a atual
