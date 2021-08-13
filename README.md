@@ -28,6 +28,7 @@ entidade
    - Manter candidato 8 horas
    - Votacao 16 horas
    - Relatorio 4 horas
+   > total de 39 horas prazo estimando 5 dias úteis
 
 ### Funcionalidades
 
