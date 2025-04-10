@@ -16,7 +16,7 @@ public class StorageCloudnary {
 
     private Map configOpenCloudinary() {
         Map chave = ObjectUtils.asMap(
-                "cloud_name", "sud",
+                "cloud_name", "storedrinks",
                 "api_key", "414869814418293",
                 "api_secret", "mWG1plNyyL8ufVQEiNNF9NnIcZw");
         return chave;
